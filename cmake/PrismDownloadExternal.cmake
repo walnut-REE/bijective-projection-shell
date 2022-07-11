@@ -11,14 +11,16 @@ endif()
 
 # Shortcut function
 function(prism_download_project name)
-	download_project(
-		PROJ         ${name}
-		SOURCE_DIR   ${PRISM_EXTERNAL}/${name}
-		DOWNLOAD_DIR ${PRISM_EXTERNAL}/.cache/${name}
-		QUIET
-		${PRISM_EXTRA_OPTIONS}
-		${ARGN}
-	)
+	if(NOT EXISTS ${PRISM_EXTERNAL}/${name})
+		download_project(
+			PROJ         ${name}
+			SOURCE_DIR   ${PRISM_EXTERNAL}/${name}
+			DOWNLOAD_DIR ${PRISM_EXTERNAL}/.cache/${name}
+			QUIET
+			${PRISM_EXTRA_OPTIONS}
+			${ARGN}
+		)
+	endif()
 endfunction()
 
 ################################################################################
